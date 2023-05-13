@@ -26,7 +26,7 @@ public class IdentityController
         if (standard != null)
         {
             boolean flag = standard.getPassword().equals(identity.getPassword());
-            if (flag==true)
+            if (flag)
             {
                 IdentifyBroadcast.SetIdentifyBroadcast(standard.getUsername());
                 return new Result(Code.GET_OK,null,"登录成功");

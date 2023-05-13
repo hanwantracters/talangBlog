@@ -67,14 +67,22 @@ public class ArticleController
     public Result DeleteById(@PathVariable Integer articleId)
     {
         boolean flag = articleService.deleteById(articleId);
-        return new Result(Code.DELETE_OK,null,"删除成功");
+        if (flag)
+        {
+            return new Result(Code.DELETE_OK,null,"删除成功");
+        }
+        else
+        {
+            return new Result(Code.DELETE_ERR,null,"删除失败,该文章不存在");
+        }
+
     }
     @PostMapping("/update")
     public Result UpdateById(@RequestBody Article article)
     {
         article.setArticleId(GetByIdAndUpdate.articleId);
         article.setUsername(GetByIdAndUpdate.username);
-        boolean flag = articleService.updateById(article);
+        articleService.updateById(article);
         return new Result(Code.UPDATE_OK,null,"更新成功");
     }
 
